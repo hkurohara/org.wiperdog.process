@@ -12,8 +12,14 @@ public class FdInputStream extends InputStream {
 	
 	@Override
 	public int read() throws IOException {
-		// TODO Auto-generated method stub
-		return 0;
+		byte [] buf = new byte[1];
+		
+		int bytesread = LibC.INSTANCE.read(fd, buf, 1);
+		if (bytesread < 1) {
+			return -1;
+		}
+		
+		return (int) buf[0];
 	}
 	
 	@Override
